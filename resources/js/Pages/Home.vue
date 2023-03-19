@@ -45,9 +45,6 @@ const sendMessageForm = (event) => {
    router.post(route('contact'), contactForm, {
       preserveScroll: true,
       preserveState: true,
-      onError: function(error) {
-         console.log(error);
-      },
       onFinish: () => contactForm.reset()
    });
 };

@@ -108,9 +108,6 @@ const createNewPost = (event) => {
     router.post(route('dashboard.portfolios.store'), form, {
         preserveState: true,
         preservceScroll: true,
-        onError: errors => {
-            console.log(errors);
-        },
         onFinish: () => form.reset(),
     })
 };
