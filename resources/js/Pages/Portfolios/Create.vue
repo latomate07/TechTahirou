@@ -94,6 +94,9 @@ const previousPage = () => window.history.back();
 const createNewRealisation = (event) => {
     router.post(route('dashboard.portfolios.store'), form, {
         preserveState: true,
+        onError: (error) => {
+            console.log(error);
+        },
         onSuccess: () => {
             form.reset();
             uploadedImages.value = [];

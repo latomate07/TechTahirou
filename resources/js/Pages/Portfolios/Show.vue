@@ -1,4 +1,5 @@
 <template>
+    <Head :title="realisation.title" />
     <MainLayout>
         <div class="dark:text-white mx-auto w-full md:max-w-2xl max-w-[90vw] md:mt-20 sm:mt-16 mt-10 format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
             <article>    
@@ -32,7 +33,7 @@
             </article>
             <div class="md:mt-16 mt-5">
                 <h1 class="font-sans font-black text-3xl text-center">{{ realisation.title }}</h1>
-                <p class="mt-5">{{ realisation.description }}</p>
+                <p class="mt-5" v-html="realisation.description.replace(/\n/g, '<br>')"></p>
             </div>
             <div class="flex items-center md:mt-16 mt-10 max-[445px]:whitespace-nowrap">
                 <h1>Tags :</h1>
@@ -52,7 +53,7 @@ import { onMounted } from 'vue';
 import RelatedPortfolios from '@/Components/RelatedPortfolios.vue';
 import MainLayout from '@/Pages/Blog/Layout/Main.vue';
 import { initFlowbite } from 'flowbite';
-import { Link } from '@inertiajs/vue3';
+import { Link, Head } from '@inertiajs/vue3';
 const props = defineProps({
     realisation: Object,
     relatedRealisations: Object

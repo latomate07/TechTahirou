@@ -16,7 +16,7 @@
                 </div>
                 <div class="grid md:grid-cols-2 grid-flow-row gap-y-4 gap-0 col-span-full">
                     <div v-for="portfolio in portfolios.slice(1)" :key="portfolio.id" class="px-2 w-full">
-                        <div class="flex rounded flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative md:h-auto sm:h-64 h-44">
+                        <div class="flex rounded flex-wrap md:w-full w-[280px] bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative md:h-auto sm:h-64 h-44">
                             <img alt="gallery" class="w-full object-full h-full object-center block opacity-25 absolute inset-0" :src="'storage/uploads/' + portfolio.images[0]?.url">
                             <div class="text-center relative z-10 w-full bottom-5">
                                 <h2 class="text-xl text-gray-900 font-medium title-font mb-2 truncate">{{ portfolio.title }}</h2>

@@ -1,4 +1,5 @@
 <template>
+    <Head title="Blog" />
     <MainLayout>
         <section class="bg-white dark:bg-darkmode">
             <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -53,7 +54,7 @@
 <script setup>
 import MainLayout from './Layout/Main.vue';
 import DefaultUserLogo from '@/Components/DefaultUserLogo.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, Head } from '@inertiajs/vue3';
 
 const props = defineProps({
     posts: {
