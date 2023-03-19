@@ -10,7 +10,7 @@
                     Développeur web passionné par la création de tout type d'applications web. Du design au développement, je m'efforce d'apporter des solutions innovantes et efficaces à chaque projet.
                 </p>
                 <div class="flex justify-center">
-                    <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg max-[380px]:text-sm">Mon CV</button>
+                    <a href="/storage/system/cv_tahirou.pdf" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg max-[380px]:text-sm" download>Mon CV</a>
                     <Link href="#contact" as="button" class="ml-4 inline-flex text-gray-700 bg-gray-100 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg max-[380px]:text-sm">Me contacter</Link>
                 </div>
             </div>

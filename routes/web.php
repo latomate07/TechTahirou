@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\AdminController;
 
 Route::controller(HomeController::class)->middleware('web')->group(function() {
     Route::get('/', 'index')->name('home');
+    Route::post('/contact', 'contact')->name('contact');
 });
 
 Route::controller(BlogController::class)->prefix('blog')->middleware('web')->group(function() {

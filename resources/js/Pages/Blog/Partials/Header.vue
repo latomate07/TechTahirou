@@ -22,7 +22,7 @@
                         <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
                 </Link>
-                <a v-else class="inline-flex items-center bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base cursor-pointer" download>
+                <a v-else href="/storage/system/cv_tahirou.pdf" class="inline-flex items-center bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base cursor-pointer" download>
                     <span class="min-[360px]:block hidden">Télécharger mon CV</span>
                     <span class="max-[360px]:block hidden">Mon CV</span>
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">

@@ -16,7 +16,7 @@
     </div>
     <div id="contact" class="md:mt-0 mt-20">
        <h1 class="text-gray-500 dark:text-white text-3xl text-center">Me contacter</h1>
-       <ContactForm />
+       <ContactForm @send-message="sendMessageForm" :errors="errors" :success="flash.success" :reactive-form="contactForm" />
     </div>
   </MainLayout>
 </template>
@@ -27,18 +27,29 @@ import Step from '@/Components/Step.vue';
 import Gallery from '@/Components/Gallery.vue';
 import BlogList from '@/Components/BlogList.vue';
 import ContactForm from '@/Components/ContactForm.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, router, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
-   portfolios: {
-      type: Object
-   },
-    posts: {
-      type: Object
-    },
-    errors: {
-        type: Object
-    }
+   portfolios: Object,
+   posts: Object,
+   errors: Object,
+   flash: Object
 });
+const contactForm = useForm({
+    name: "",
+    email: "",
+    message: "",
+});
+
+const sendMessageForm = (event) => {
+   router.post(route('contact'), contactForm, {
+      preserveScroll: true,
+      preserveState: true,
+      onError: function(error) {
+         console.log(error);
+      },
+      onFinish: () => contactForm.reset()
+   });
+};
 
 </script>
