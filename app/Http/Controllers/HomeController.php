@@ -45,7 +45,7 @@ class HomeController extends Controller
             ));
 
             // Send mail to admin
-            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail(
+            Mail::to(env('ADMIN_MAIL'))->send(new ContactMail(
                 $validated['name'],
                 $validated['email'],
                 $validated['message']
