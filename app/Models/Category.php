@@ -11,6 +11,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'post_id'];
+
     /**
      * Get related post
      * 

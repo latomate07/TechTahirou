@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
 use App\Models\Post;
-use App\Models\Role;
-use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Media;
 use App\Enums\MediaType;
@@ -15,9 +13,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\StorePortfolioRequest;
+use App\Models\Statistic;
 use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
@@ -26,7 +24,21 @@ class AdminController extends Controller
 
     public function index()
     {
-        return Inertia::render('Dashboard');
+        $statistics = Statistic::with('statiscable')->get()->map(function($statistic) {
+                            return collect([
+                                $statistic->statisticable_type => [
+                                    'max_views' => $statistic->sum('visits'),
+                                    'max_liked' => $statistic->sum('likes')
+                                ] 
+                            ]);
+                        })
+                        ->unique()
+                        ->collapse();
+
+        return Inertia::render('Dashboard', [
+            'posts'      => Post::with('category', 'statistic')->get(),
+            'statistics' => $statistics
+        ]);
     }
 
     public function showArticles(Request $request)

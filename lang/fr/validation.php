@@ -181,7 +181,9 @@ return [
 
     'attributes' => [
         'title' => 'titre',
-        'name'  => 'nom'
+        'name'  => 'nom',
+        'category' => 'catégorie',
+        'post_id' => 'ID de l\'article'
     ],
 
 ];

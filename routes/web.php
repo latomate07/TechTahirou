@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,10 @@ Route::controller(AdminController::class)->prefix('admin')->middleware(['auth', 
     Route::get('/dashboard/portfolios/ajout', 'createPortfolio')->name('dashboard.portfolios.create');
     Route::post('/dashboard/portfolios/ajout', 'storePortfolio')->name('dashboard.portfolios.store');
     Route::delete('/dashboard/delete-portfolio/{portfolio_id}', 'deletePortfolio')->name('dashboard.portfolios.delete');
+});
+
+Route::controller(DashboardController::class)->prefix('dashboard')->middleware('auth')->group(function() {
+    Route::post('/store-new-category', 'saveCategory')->name('dashboard.store-category');
 });
 
 Route::middleware('auth')->group(function () {

@@ -9,6 +9,8 @@ class SubCategory extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     /**
      * Get category
      */
