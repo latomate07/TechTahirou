@@ -74,11 +74,11 @@ class Post extends Model
     /**
      * Get post thumbnail
      * 
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function thumbnail(): MorphOne
+    public function thumbnails(): MorphMany
     {
-        return $this->morphOne(Media::class, 'mediable');
+        return $this->morphMany(Media::class, 'mediable');
     }
 
     /**

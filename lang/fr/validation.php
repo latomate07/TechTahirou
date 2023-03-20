@@ -144,7 +144,7 @@ return [
     'starts_with' => 'The :attribute field must start with one of the following: :values.',
     'string' => 'Le champ :attribute doit être une chaîne de caractère.',
     'timezone' => 'The :attribute field must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => 'L\'attribut :attribute a déjà été utilisé.',
     'uploaded' => 'The :attribute failed to upload.',
     'uppercase' => 'The :attribute field must be uppercase.',
     'url' => 'The :attribute field must be a valid URL.',
@@ -183,7 +183,10 @@ return [
         'title' => 'titre',
         'name'  => 'nom',
         'category' => 'catégorie',
-        'post_id' => 'ID de l\'article'
+        'post_id' => 'ID de l\'article',
+        'categories' => 'catégories',
+        'sub_category' => 'sous catégorie',
+        'sub_categories' => 'sous catégories'
     ],
 
 ];

@@ -26,36 +26,29 @@
                                     <input type="text" name="title" v-model="form.title"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         required="">
+                                    <InputError :message="errors?.title" />
                                 </div>
                                 <div class="sm:col-span-2">
-                                    <WYSIWYGEditor />
+                                    <WYSIWYGEditor v-model="form.content" />
                                 </div>
                                 <div>
-                                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie</label>
-                                    <select v-model="form.categories" id="category" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option selected="">Select category</option>
-                                        <option value="TV">TV/Monitors</option>
-                                        <option value="PC">PC</option>
-                                        <option value="GA">Gaming/Console</option>
-                                        <option value="PH">Phones</option>
-                                    </select>
+                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie</label>
+                                    <input type="text" v-model="form.categories" 
+                                           class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <InputError :message="errors?.categories" />
                                 </div>
                                 <div>
                                     <label for="sub-category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sous-catégorie</label>
-                                    <select v-model="form.categories" id="sub-category" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option selected="">Select category</option>
-                                        <option value="TV">TV/Monitors</option>
-                                        <option value="PC">PC</option>
-                                        <option value="GA">Gaming/Console</option>
-                                        <option value="PH">Phones</option>
-                                    </select>
+                                    <input type="text" v-model="form.sub_categories" 
+                                           class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <InputError :message="errors?.sub_categories" />
                                 </div>
                                 <div class="w-full col-span-full">
                                     <label for="brand"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tags</label>
                                     <input type="text" name="tags" v-model="form.tags"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        required="">
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <InputError :message="errors?.tags" />
                                 </div>
                                 <div class="sm:col-span-2 flex items-center justify-center w-full">
                                     <label for="dropzone-file"
@@ -74,9 +67,12 @@
                                             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG ou WEBP (MAX.
                                                 800x400px)</p>
                                         </div>
-                                        <input type="file" id="dropzone-file" multiple name="images" class="hidden"
-                                            @change="addMedias" />
+                                        <input type="file" id="dropzone-file" name="images" class="hidden" @change="addMedias" multiple />
                                     </label>
+                                </div>
+                                <InputError :message="errors?.images" />
+                                <div class="col-span-full flex w-full overflow-x-scroll whitespace-nowrap" v-if="uploadedImages.length > 0">
+                                    <img id="img-preview" v-for="(previewImage, index) in uploadedImages" :key="index" :src="previewImage" alt="preview-image" class="h-40 w-auto mr-2 rounded">
                                 </div>
                             </div>
                             <button type="submit"
@@ -94,25 +90,46 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { router, useForm } from '@inertiajs/vue3';
 import WYSIWYGEditor from '@/Components/WYSIWYG-Editor.vue';
-
+import { ref } from 'vue';
+import InputError from '@/Components/InputError.vue';
+const props = defineProps({
+    errors: Object
+});
 const form = useForm({
     title: null,
     content: null,
     tags: null,
-    categories: [],
+    categories: null,
+    sub_categories: null,
     images: []
 });
 
 const previousPage = () => window.history.back();
-const createNewPost = (event) => {
-    router.post(route('dashboard.portfolios.store'), form, {
+const createNewPost = () => {
+    router.post(route('dashboard.articles.store'), form, {
         preserveState: true,
-        preservceScroll: true,
-        onFinish: () => form.reset(),
+        onFinish: () => {
+            if(Object.keys(props.errors).length === 0) {
+                form.reset();
+                uploadedImages.value = [];
+            }
+        }
     })
 };
+const uploadedImages = ref([]);
 const addMedias = (event) => {
     const files = event.target.files;
     form.images.push(...files);
+
+    for(let i = 0; i < files.length; i++) {
+        if (FileReader && files && files.length) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                uploadedImages.value.push(reader.result);
+            };
+
+            reader.readAsDataURL(files[i]);
+        }
+    }
 }
 </script>

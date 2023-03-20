@@ -21,7 +21,7 @@ class HomeController extends Controller
                                 ->get()
                                 ->take(3);
 
-        $posts = Post::with('user', 'category', 'comments', 'thumbnail')->get();
+        $posts = Post::with('user', 'category', 'comments', 'thumbnails', 'statistic')->get();
 
         return Inertia::render('Home', [
             'posts'      => $posts,

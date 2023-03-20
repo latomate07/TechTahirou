@@ -10,7 +10,7 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = Post::with('user', 'category', 'comments', 'thumbnail')
+        $posts = Post::with('user', 'category', 'comments', 'thumbnails')
                       ->when($request->has('search'), function($query) use($request) {
                            $query->where('title', 'LIKE', '%'. $request->search .'%');
                       })
@@ -23,13 +23,22 @@ class BlogController extends Controller
 
     public function show(String $uniquePostSlug)
     {   
-        $post = Post::with('user', 'category', 'comments', 'thumbnail')->firstWhere('slug', $uniquePostSlug);
+        $post = Post::with(['user', 'category', 'comments', 'thumbnails', 'statistic'])
+                    ->firstWhere('slug', $uniquePostSlug);
+
+        // Increment view
+        $post->statistic->increment('visits');
 
         // Don't continue if post wasn't found
         abort_if(is_null($post), 404);
+
+        // Get related posts
+        $relatedPosts = Post::with('user', 'category', 'comments', 'thumbnails', 'statistic')->whereNotIn('id', [$post->id])->get();
+
         
         return Inertia::render('Blog/Show', [
-            'post' => $post
+            'post' => $post,
+            'relatedPosts' => $relatedPosts
         ]);
     }
 }

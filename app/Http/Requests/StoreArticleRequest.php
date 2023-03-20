@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreArticleRequest extends FormRequest
@@ -22,7 +23,13 @@ class StoreArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'unique:posts'],
+            'content' => ['required', 'string', 'unique:posts'],
+            'tags' => ['nullable', 'string'],
+            'categories' => ['required', 'string'],
+            'sub_categories' => ['nullable', 'string'],
+            'images' => ['required', 'array'],
+            'images.*' => ['image','mimes:jpeg,jpg,png,webp,svg', 'max:2048']
         ];
     }
 }
