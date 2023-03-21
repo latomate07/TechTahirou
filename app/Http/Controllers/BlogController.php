@@ -24,10 +24,15 @@ class BlogController extends Controller
     public function show(String $uniquePostSlug)
     {   
         $post = Post::with(['user', 'category', 'comments', 'thumbnails', 'statistic'])
-                    ->firstWhere('slug', $uniquePostSlug);
+                    ->where('slug', $uniquePostSlug)
+                    ->first();
 
-        // Increment view
-        $post->statistic->increment('visits');
+        if(is_null($post->statistic()->first())) {
+            $post->statistic()->create([
+                'visits' => 1
+            ]);
+        }
+        $post->statistic()->increment('visits');
 
         // Don't continue if post wasn't found
         abort_if(is_null($post), 404);

@@ -1,8 +1,8 @@
 <template>
     <section class="text-gray-600 body-font">
         <div class="container px-5 md:pt-24 pt-10 mx-auto">
-            <div class="flex flex-wrap -m-4">
-                <div class="p-4 md:w-1/3" v-for="article in selectRandomItems(articles, 3)" :key="article.id">
+            <div class="flex flex-wrap flex-col -m-4">
+                <div class="p-4 md:w-1/3" v-for="article in articles" :key="article.id">
                     <div class="h-full border-2 border-gray-200 dark:border-gray-800 border-opacity-60 rounded-lg overflow-hidden">
                         <img class="lg:h-48 md:h-36 w-full object-cover object-center" :src="'/storage/uploads/' + article.thumbnails[0]?.url" alt="blog">
                         <div class="p-6">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="articles.length > 0" class="md:mt-10 md:mb-20 mx-auto">
+                <div v-if="articles.length > 0" class="md:mt-10 md:mb-20 mx-auto block">
                     <Link :href="route('blog.home')" class="block p-2 dark:text-white rounded-full mx-auto backdrop-blur drop-shadow-xl border">Voir plus</Link>
                 </div>
             </div>
@@ -46,24 +46,4 @@ import { Link } from '@inertiajs/vue3';
 const props = defineProps({
     articles: Object
 });
-
-console.log(props.articles);
-
-const selectRandomItems = (obj, num) => {
-  if (Object.keys(obj).length < num) {
-    return null;
-  }
-
-  var items = [];
-  var keys = Object.keys(obj);
-  while (items.length < num) {
-    var index = Math.floor(Math.random() * keys.length);
-    var key = keys[index];
-    if (!items.includes(obj[key])) {
-      items.push(obj[key]);
-    }
-  }
-
-  return items;
-}
 </script>

@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white uppercase">{{ post.title }}</h1>
-                    <p class="text-gray-900 dark:text-slate-400" v-html="post.content.replace(/\n/g, '<br>')"></p>
+                    <p class="text-gray-900 dark:text-slate-200" v-html="post.content.replace(/\n/g, '<br>')"></p>
                 </header>
                 <span class="flex items-center mt-5 dark:text-white">
                     <svg class="w-4 h-4 mr-1" data-darkreader-inline-stroke="" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
