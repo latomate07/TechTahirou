@@ -24,20 +24,8 @@ class Statistic extends Model
      * 
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function statiscable(): MorphTo
+    public function statisticable(): MorphTo
     {
         return $this->morphTo();
-    }
-
-    /**
-     * Get the statistaticable type
-     *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute
-     */
-    protected function statisticableType(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => str_replace("App\Models\\", '', $value),
-        );
     }
 }

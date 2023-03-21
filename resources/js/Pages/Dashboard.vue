@@ -82,7 +82,7 @@ import { computed } from 'vue';
 const props = defineProps({
     errors: Object,
     posts: Array,
-    statistics: Array
+    statistics: Object
 });
 const categoryForm = useForm({
     category: "",

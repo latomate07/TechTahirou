@@ -126,6 +126,14 @@ class Post extends Model
     }
 
     /**
+     * Get this model alias
+     */
+    public static function alias()
+    {
+        return 'Post';
+    }
+
+    /**
      * Automatically add slug to post
      */
     protected static function boot()

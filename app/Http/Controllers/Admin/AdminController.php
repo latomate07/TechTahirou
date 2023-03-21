@@ -25,16 +25,19 @@ class AdminController extends Controller
 
     public function index()
     {
-        $statistics = Statistic::with('statiscable')->get()->map(function($statistic) {
-                            return collect([
-                                $statistic->statisticable_type => [
-                                    'max_views' => $statistic->sum('visits'),
-                                    'max_liked' => $statistic->sum('likes')
-                                ] 
-                            ]);
-                        })
-                        ->unique()
-                        ->collapse();
+        $statistics = Statistic::with('statisticable')
+                                ->has('statisticable')
+                                ->get()
+                                ->groupBy('statisticable_type')
+                                ->map(function ($group, $type) {
+                                    return collect([
+                                        (new $type)->alias() => [
+                                            'max_views' => $group->sum('visits'),
+                                            'max_liked' => $group->sum('likes')
+                                        ]
+                                    ]);
+                                })
+                                ->collapse();
 
         return Inertia::render('Dashboard', [
             'posts'      => Post::with('category', 'statistic')->get(),
@@ -140,7 +143,6 @@ class AdminController extends Controller
     public function storeArticle(StoreArticleRequest $request)
     {
         $validated = $request->validated();
-        // dd(collect($validated['images']));
 
         // Add new article
         $article = Auth::user()->posts()

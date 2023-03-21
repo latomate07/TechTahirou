@@ -65,6 +65,14 @@ class Portfolio extends Model
     }
 
     /**
+     * Get this model alias
+     */
+    public static function alias()
+    {
+        return 'Portfolio';
+    }
+
+    /**
      * Automatically add slug to portfolio
      */
     protected static function boot()
