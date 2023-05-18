@@ -32,26 +32,16 @@ class PortfolioController extends Controller
         ]);
     }
 
-    public function show(String $uniquePortfolioSlug)
+    public function show(Portfolio $portfolio)
     {   
-        $realisation = Portfolio::with(['images', 'tags', 'statistic' => fn($query) => $query->withDefault()])
-                                ->firstWhere('slug', $uniquePortfolioSlug);
         // Increment view
-        if(is_null($realisation->statistic()->first())) {
-            $realisation->statistic()->create([
-                'visits' => 1
-            ]);
-        }
-        $realisation->statistic()->increment('visits');
+        $portfolio->statistic()->increment('visits');
 
-        // Get related realisations
-        $relatedRealisations = Portfolio::with('images', 'statistic')->whereNotIn('id', [$realisation->id])->get();
+        // Get related realisations [Temporary]
+        $relatedRealisations = Portfolio::with('images', 'statistic')->whereNotIn('id', [$portfolio->id])->get();
 
-        // Don't continue if realisation wasn't found
-        abort_if(is_null($realisation), 404);
-        
         return Inertia::render('Portfolios/Show', [
-            'realisation' => $realisation,
+            'realisation' => $portfolio,
             'relatedRealisations' => $relatedRealisations
         ]);
     }

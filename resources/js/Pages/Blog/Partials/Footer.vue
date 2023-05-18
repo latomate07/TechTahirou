@@ -1,6 +1,6 @@
 <template>
     <footer class="text-gray-600 body-font">
-        <!-- <CallToAction :is-on-blog="route().current('blog.*')" @send-message="sendMessageForm" :success="usePage().props.flash.success" :errors="usePage().props.errors" :reactive-form="form" /> -->
+        <CallToAction :is-on-blog="route().current('blog.*')" @send-message="sendMessageForm" :success="usePage().props.flash.success" :errors="usePage().props.errors" :reactive-form="form" />
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
             <Logo />
             <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 TechTahirou —
@@ -38,7 +38,6 @@ import Logo from '@/Components/Logo.vue';
 import CallToAction from '@/Components/CallToAction.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3';
-
 const form = useForm({
     name: "",
     email: "",

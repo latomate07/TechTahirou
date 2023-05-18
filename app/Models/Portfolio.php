@@ -18,7 +18,16 @@ class Portfolio extends Model
         'title',
         'slug',
         'description',
-        'user_id'
+        'user_id',
+    ];
+
+    /**
+     * Relations that should be always loaded with this model.
+     */
+    protected $with = [
+        'statistic',
+        'user',
+        'tags',
     ];
 
     public function user(): BelongsTo
@@ -59,9 +68,12 @@ class Portfolio extends Model
      */
     public function scopeRelatedPortfolios($query)
     {
-        return $query->whereHas('tags', function ($query) {
-            $query->whereIn('name', $this->tags->pluck('name')->toArray());
-        });
+        // dd($this->tags());
+        return $this->tags()->whereIn('name', $this->tags->pluck('name')->toArray());
+
+        // return $query->whereHas('tags', function ($query) {
+        //     $query->whereIn('name', $this->tags->pluck('name')->toArray());
+        // });
     }
 
     /**

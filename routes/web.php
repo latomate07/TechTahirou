@@ -58,16 +58,21 @@ Route::controller(AdminController::class)->prefix('admin')->middleware(['auth', 
     Route::delete('/dashboard/delete-portfolio/{portfolio_id}', 'deletePortfolio')->name('dashboard.portfolios.delete');
 });
 
-Route::controller(DashboardController::class)->prefix('dashboard')->middleware('auth')->group(function() {
-    Route::post('/store-new-category', 'saveCategory')->name('dashboard.store-category');
-});
-
 Route::middleware('auth')->group(function () {
+    Route::controller(DashboardController::class)->prefix('dashboard')->group(function() {
+        Route::post('/store-new-category', 'saveCategory')->name('dashboard.store-category');
+    });
     Route::controller(ProfileController::class)->group(function() {
         Route::get('/profile', 'edit')->name('profile.edit');
         Route::patch('/profile', 'update')->name('profile.update');
         Route::delete('/profile', 'destroy')->name('profile.destroy');    
     });
 });
+
+// Others Pages
+Route::get('/politique-de-confidentialite', function() {
+    return Inertia::render('Infos/Politiques');
+})->name('pages.politiques');
+
 
 require __DIR__.'/auth.php';
