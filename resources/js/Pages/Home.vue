@@ -2,6 +2,9 @@
   <Head title="Accueil" />
   <MainLayout>
     <Hero />
+    <div class="mb-12">
+       <StackCarrousel />
+    </div>
     <div id="parcours">
        <h1 class="text-gray-500 dark:text-white text-3xl text-center">Mon parcours</h1>
        <Step />
@@ -27,6 +30,7 @@ import Step from '@/Components/Step.vue';
 import Gallery from '@/Components/Gallery.vue';
 import BlogList from '@/Components/BlogList.vue';
 import ContactForm from '@/Components/ContactForm.vue';
+import StackCarrousel from '@/Components/StackCarrousel.vue';
 import { Head, router, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
