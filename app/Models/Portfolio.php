@@ -28,6 +28,7 @@ class Portfolio extends Model
         'statistic',
         'user',
         'tags',
+        'images',
     ];
 
     public function user(): BelongsTo
@@ -68,12 +69,9 @@ class Portfolio extends Model
      */
     public function scopeRelatedPortfolios($query)
     {
-        // dd($this->tags());
-        return $this->tags()->whereIn('name', $this->tags->pluck('name')->toArray());
-
-        // return $query->whereHas('tags', function ($query) {
-        //     $query->whereIn('name', $this->tags->pluck('name')->toArray());
-        // });
+        return $query->whereHas('tags', function ($query) {
+            $query->whereIn('name', $this->tags->pluck('name')->toArray());
+        });
     }
 
     /**
