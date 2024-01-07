@@ -1,21 +1,16 @@
 <template>
     <section>
-        <div :ref="(el) => { sliderContainer = el }" class="container mx-auto">
-            <div class="flex overflow-x-scroll pb-10 hide-scroll-bar">
+        <div :ref="(el) => { sliderContainer = el }" class="container mx-auto flex items-center gap-2 pb-10">
+            <div class="text-2xl dark:text-white md:px-0 px-4 font-raleway font-extrabold">
+                Mes Technos:
+            </div>
+            <div class="flex overflow-x-scroll hide-scroll-bar">
                 <div class="flex gap-x-2 flex-nowrap mx-auto">
                     <div class="inline-block animate-pulse flex-nowrap w-20 dark:bg-gray-800 bg-gray-200 rounded-full p-2"
                         v-for="stack in stacks" :key="stack.id">
                         <img :src="stack.image" :alt="stack.title" class="object-contain w-full h-full rounded-full">
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="flex gap-x-2 -mt-4">
-            <div v-for="(item, index) in 52" :key="index"
-                class="hidden md:block w-40 h-40 bg-gradient-to-b dark:from-gray-900 from-gray-300 dark:via-gray-800 via-gray-200 to-transparent animate-pulse">
-            </div>
-            <div v-for="(item, index) in 30" :key="index"
-                class="block md:hidden w-12 h-20 bg-gradient-to-b dark:from-gray-900 from-gray-300 dark:via-gray-800 via-gray-200 to-transparent animate-pulse">
             </div>
         </div>
     </section>
@@ -64,13 +59,19 @@ const stacks = [
         title: 'tailwindcss',
         image: '/storage/images/stacks/tailwindcss-logo.png',
     },
+
     {
         id: 8,
+        title: 'git',
+        image: '/storage/images/stacks/git-logo.png',
+    },
+    {
+        id: 9,
         title: 'stripe',
         image: '/storage/images/stacks/stripe-logo.png',
     },
     {
-        id: 9,
+        id: 10,
         title: 'php',
         image: '/storage/images/stacks/php-logo.png',
     },
@@ -93,11 +94,6 @@ const stacks = [
         id: 14,
         title: 'elementor',
         image: '/storage/images/stacks/elementor-logo.png',
-    },
-    {
-        id: 15,
-        title: 'git',
-        image: '/storage/images/stacks/git-logo.png',
     },
 ]
 </script>

@@ -2,7 +2,7 @@
     <Head :title="post.title" />
     <MainLayout>
         <div class="flex justify-between px-4 md:mt-20 sm:mt-16 mt-10 mx-auto max-w-screen-xl">
-            <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+            <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-yellow dark:format-invert">
                 <header class="mb-4 lg:mb-6 not-format">
                     <address class="flex items-center mb-6 not-italic">
                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
@@ -15,7 +15,7 @@
                     </address>
                     <div id="controls-carousel" class="relative mb-10" data-carousel="slide">
                         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                            <div v-for="image in post.thumbnails" class="hidden duration-700 ease-in-out" data-carousel-item>
+                            <div v-for="(image, index) in post.thumbnails" :key="index" class="hidden duration-700 ease-in-out" data-carousel-item>
                                 <img :src="'/storage/uploads/' + image.url" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                             </div>
                         </div>
@@ -47,29 +47,32 @@
                 </span>
             </article>
         </div>
-        <article class="mt-20 mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-            <CommentForm />
+        <article class="mt-20 mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-yellow dark:format-invert">
+            <CommentForm :post="post" />
         </article>
-        <!-- <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-            <Comment />
-        </article> -->
+        <article v-if="post.comments.length > 0" class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-yellow dark:format-invert">
+            <template v-for="comment in post.comments" :key="comment.id">
+                <Comment :comment="comment" />
+            </template>
+        </article>
         <RelatedPosts :posts="relatedPosts" />
     </MainLayout>
 </template>
 <script setup>
+import { initFlowbite } from 'flowbite';
+import { onMounted } from 'vue';
+import { Head } from '@inertiajs/vue3';
 import MainLayout from './Layout/Main.vue';
 import CommentForm from '@/Components/Forms/CommentForm.vue';
 import Comment from '@/Components/Comment.vue';
 import RelatedPosts from '@/Components/RelatedPosts.vue';
 import DefaultUserLogo from '@/Components/DefaultUserLogo.vue';
-import { initFlowbite } from 'flowbite';
-import { onMounted } from 'vue';
-import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
     post: Object,
     relatedPosts: Object
 });
+
 onMounted(() => {
     initFlowbite();
 })

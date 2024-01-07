@@ -889,7 +889,7 @@
                 class="flex items-center p-4 bg-white rounded-lg shadow-xs"
               >
                 <div
-                  class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full"
+                  class="p-3 mr-4 text-yellow-500 bg-yellow-100 rounded-full"
                 >
                   <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
@@ -1446,7 +1446,7 @@
                   <!-- Chart legend -->
                   <div class="flex items-center">
                     <span
-                      class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"
+                      class="inline-block w-3 h-3 mr-1 bg-yellow-500 rounded-full"
                     ></span>
                     <span>Shirts</span>
                   </div>

@@ -13,6 +13,8 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                raleway: ['Raleway'],
+                rubikglitch: ['Rubik Glitch'],
             },
             colors: {
                 darkmode: '#253242'

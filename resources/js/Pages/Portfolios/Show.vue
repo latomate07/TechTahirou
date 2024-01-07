@@ -1,11 +1,11 @@
 <template>
     <Head :title="realisation.title" />
     <MainLayout>
-        <div class="dark:text-white mx-auto w-full md:max-w-2xl max-w-[90vw] md:mt-20 sm:mt-16 mt-10 format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+        <div class="dark:text-white mx-auto w-full md:max-w-2xl max-w-[90vw] md:mt-20 sm:mt-16 mt-10 format format-sm sm:format-base lg:format-lg format-yellow dark:format-invert">
             <article>    
                 <div id="controls-carousel" class="relative" data-carousel="slide">
                     <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                        <div v-for="image in realisation.images" class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <div v-for="(image, index) in realisation.images" :key="index" class="hidden duration-700 ease-in-out" data-carousel-item>
                             <img :src="'/storage/uploads/' + image.url" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                         </div>
                     </div>
@@ -38,7 +38,7 @@
             <div class="flex items-center md:mt-16 mt-10 max-[445px]:whitespace-nowrap">
                 <h1>Tags :</h1>
                 <div class="flex flex-nowrap overflow-x-scroll max-[445px]:whitespace-nowrap">
-                    <Link v-for="tag in realisation.tags" :key="tag.id" :href="route('portfolios.home') + '/?searchByTag=' + tag.name" class="relative z-6 rounded-full bg-blue-50 py-1.5 px-3 font-medium text-blue-600 hover:bg-blue-100 ml-2">
+                    <Link v-for="tag in realisation.tags" :key="tag.id" :href="route('portfolios.home') + '/?searchByTag=' + tag.name" class="relative z-6 rounded-full bg-yellow-50 py-1.5 px-3 font-medium text-yellow-600 hover:bg-yellow-100 ml-2">
                         {{ tag.name }}
                     </Link>
                     <p v-if="realisation.tags.length == 0" class="ml-2">Non défini</p>

@@ -14,7 +14,7 @@
                             <input v-model="reactiveForm.email" class="block p-3 pl-10 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Entrer votre email" type="email" id="email" required="">
                         </div>
                         <div>
-                            <button disabled type="submit" class="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-indigo-500 border-indigo-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">S'abonner</button>
+                            <button disabled type="submit" class="py-3 px-5 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-yellow-500 border-yellow-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">S'abonner</button>
                         </div>
                     </div>
                     <div class="mx-auto max-w-screen-sm text-sm text-left text-gray-500 newsletter-form-footer dark:text-gray-300">Je me soucis de la protection de vos données. <a href="#" class="font-medium text-primary-600 dark:text-primary-500 underline decoration-sky-500">Lisez la politique de confidentialité</a>.</div>
@@ -29,26 +29,26 @@
                             <div class="p-2 w-1/2">
                                 <div class="relative">
                                     <label for="name" class="leading-7 text-sm text-gray-600 dark:text-white">Nom</label>
-                                    <input v-model="reactiveForm.name" type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <input v-model="reactiveForm.name" type="text" id="name" name="name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     <InputError class="mt-2" :message="errors?.name" />
                                 </div>
                             </div>
                             <div class="p-2 w-1/2">
                                 <div class="relative">
                                     <label for="email" class="leading-7 text-sm text-gray-600 dark:text-white">Email</label>
-                                    <input v-model="reactiveForm.email" type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <input v-model="reactiveForm.email" type="email" id="email" name="email" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     <InputError class="mt-2" :message="errors?.email" />
                                 </div>
                             </div>
                             <div class="p-2 w-full">
                                 <div class="relative">
                                     <label for="message" class="leading-7 text-sm text-gray-600 dark:text-white">Message</label>
-                                    <textarea v-model="reactiveForm.message" id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                    <textarea v-model="reactiveForm.message" id="message" name="message" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-yellow-500 focus:bg-white focus:ring-2 focus:ring-yellow-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
                                     <InputError class="mt-2" :message="errors?.message" />
                                 </div>
                             </div>
                             <div class="p-2 w-full">
-                                <button class="flex mx-auto text-white bg-indigo-500 border-indigo-600 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Soumettre</button>
+                                <button class="flex mx-auto text-white bg-yellow-500 border-yellow-600 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">Soumettre</button>
                             </div>
                             <Transition>
                                 <div ref="successBlock" v-if="success" class="mx-auto p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">

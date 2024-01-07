@@ -10,7 +10,7 @@
                     </p>
                 </div> 
                 <div class="flex flex-nowrap items-center justify-center pb-2 sm:pb-4 md:pb-8">
-                    <button @click="showAllTags" type="button" class="text-blue-700 hover:text-white border border-blue-600 bg-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base sm:px-5 sm:py-2.5 px-2.5 text-center mr-3 mb-3 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800 tagAllBtn tagButtons">
+                    <button @click="showAllTags" type="button" class="text-yellow-700 hover:text-white border border-yellow-600 bg-white hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-300 rounded-full text-base sm:px-5 sm:py-2.5 px-2.5 text-center mr-3 mb-3 dark:border-yellow-500 dark:text-yellow-500 dark:hover:text-white dark:hover:bg-yellow-500 dark:bg-gray-900 dark:focus:ring-yellow-800 tagAllBtn tagButtons">
                         Tous
                     </button>
                     <div class="flex overflow-x-scroll whitespace-nowrap md:p-5 p-1">
@@ -32,7 +32,7 @@
                                 </p>
                                 <h1 class="text-md mt-5">Languages utilisés :</h1>
                                 <div class="flex justify-between gap-2 flex-nowrap overflow-x-scroll whitespace-nowrap mt-2">
-                                    <h2 v-for="tag in portfolio.tags" :key="tag.id" class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1 p-2 rounded-full border border-gray-300">
+                                    <h2 v-for="tag in portfolio.tags" :key="tag.id" class="tracking-widest text-sm title-font font-medium text-yellow-500 mb-1 p-2 rounded-full border border-gray-300">
                                         {{ tag.name }}
                                     </h2>
                                     <p v-if="portfolio.tags.length == 0">Non défini</p>
@@ -79,12 +79,12 @@ const removeRequestParameters = () => {
 const handleActiveTab = (currentTag, isTagAllBtn = false) => {
     // Disable active tab on all tag buttons
     document.querySelectorAll('.tagButtons').forEach((tagButton) => {
-        tagButton.classList.remove('bg-blue-700', 'text-white');
-        tagButton.classList.contains('tagAllBtn') ? tagButton.classList.add('bg-white', 'text-blue-700') : tagButton.classList.add('bg-white', 'text-black');
+        tagButton.classList.remove('bg-yellow-700', 'text-white');
+        tagButton.classList.contains('tagAllBtn') ? tagButton.classList.add('bg-white', 'text-yellow-700') : tagButton.classList.add('bg-white', 'text-black');
     });
 
     // Active tab
-    isTagAllBtn ? currentTag.classList.remove('bg-white', 'text-blue-700') : currentTag.classList.remove('bg-white');
-    currentTag.classList.add('bg-blue-700', 'text-white');
+    isTagAllBtn ? currentTag.classList.remove('bg-white', 'text-yellow-700') : currentTag.classList.remove('bg-white');
+    currentTag.classList.add('bg-yellow-700', 'text-white');
 };
 </script>

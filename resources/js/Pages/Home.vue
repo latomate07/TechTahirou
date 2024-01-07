@@ -6,19 +6,19 @@
        <StackCarrousel />
     </div>
     <div id="parcours">
-       <h1 class="text-gray-500 dark:text-white text-3xl text-center">Mon parcours</h1>
+       <h2 class="text-gray-800 font-extrabold uppercase dark:text-white text-3xl text-center">Mon parcours</h2>
        <Step />
     </div>
     <div id="portfolio">
-       <h1 class="text-gray-500 dark:text-white text-3xl text-center">Portfolio</h1>
+       <h2 class="text-gray-800 font-extrabold uppercase dark:text-white text-3xl text-center">Portfolio</h2>
        <Gallery :portfolios="portfolios" />
     </div>
     <div id="blog">
-       <h1 class="text-gray-500 dark:text-white text-3xl text-center">Blog</h1>
+       <h2 class="text-gray-800 font-extrabold uppercase dark:text-white text-3xl text-center">Blog</h2>
        <BlogList :articles="posts" />
     </div>
     <div id="contact" class="md:mt-0 mt-20">
-       <h1 class="text-gray-500 dark:text-white text-3xl text-center">Me contacter</h1>
+       <h2 class="text-gray-800 font-extrabold uppercase dark:text-white text-3xl text-center">Me contacter</h2>
        <ContactForm @send-message="sendMessageForm" :errors="errors" :success="flash.success" :reactive-form="contactForm" />
     </div>
   </MainLayout>

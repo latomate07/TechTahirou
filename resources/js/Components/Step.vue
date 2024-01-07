@@ -7,11 +7,11 @@
                     <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
                         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
                     </div>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500 inline-flex items-center justify-center text-white relative z-10">
                         1
                     </div>
                     <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Découverte</h2>
+                        <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Découverte</h3>
                         <p class="leading-relaxed dark:text-gray-300">
                             J'ai découvert le développement web il y a 3 ans. J'ai voulu tester quelque chose de nouveau et j'ai décidé de m'initier à ce domaine passionnant.
                         </p>
@@ -21,11 +21,11 @@
                     <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
                         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
                     </div>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500 inline-flex items-center justify-center text-white relative z-10">
                         2
                     </div>
                     <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Formation</h2>
+                        <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Formation</h3>
                         <p class="leading-relaxed dark:text-gray-300">
                             Je me suis lancé dans le codage sans savoir ce que je faisais. J'ai appris de manière autonome en regardant des vidéos YouTube et des tutoriels sur Internet.
                         </p>
@@ -35,11 +35,11 @@
                     <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
                         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
                     </div>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500 inline-flex items-center justify-center text-white relative z-10">
                         3
                     </div>
                     <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Renforcement des compétences</h2>
+                        <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Renforcement des compétences</h3>
                         <p class="leading-relaxed dark:text-gray-300">
                             Environ 1 an après mes premiers pas, j'ai pris conscience que je progressais rapidement. Ainsi, j'ai continué à affiner mes compétences en lançant plusieurs projets personnels.
                         </p>
@@ -49,22 +49,22 @@
                     <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
                         <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
                     </div>
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500 inline-flex items-center justify-center text-white relative z-10">
                         4
                     </div>
                     <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Découverte du domaine spécifique</h2>
+                        <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Découverte du domaine spécifique</h3>
                         <p class="leading-relaxed dark:text-gray-300">
                             Au fil du temps, j'ai développé un intérêt particulier pour le développement Web et mobile. Je me suis donc concentré sur l'apprentissage des langages et outils pertinents pour ce domaine.
                         </p>
                     </div>
                     </div>
                     <div class="flex relative">
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-yellow-500 inline-flex items-center justify-center text-white relative z-10">
                         5
                     </div>
                     <div class="flex-grow pl-4">
-                        <h2 class="font-medium title-font text-sm text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Professionnalisation</h2>
+                        <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-1 tracking-wider uppercase">Professionnalisation</h3>
                         <p class="leading-relaxed dark:text-gray-300">
                             Finalement, j'ai commencé à travailler en tant que développeur en alternance pour une petite entreprise. Cette expérience m'a permis d'acquérir des compétences en gestion de projet et en travail en équipe.
                         </p>

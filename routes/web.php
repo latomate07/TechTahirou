@@ -10,6 +10,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentReplyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,23 +24,33 @@ use App\Http\Controllers\Admin\DashboardController;
 |
 */
 
-Route::controller(HomeController::class)->middleware('web')->group(function() {
+Route::controller(HomeController::class)->middleware('web')->group(function () {
     Route::get('/', 'index')->name('home');
     Route::post('/contact', 'contact')->name('contact');
 });
 
-Route::controller(BlogController::class)->prefix('blog')->middleware('web')->group(function() {
+Route::controller(BlogController::class)->prefix('blog')->middleware('web')->group(function () {
     Route::get('/', 'index')->name('blog.home');
     Route::get('/article/{post:slug}', 'show')->name('blog.show');
     Route::get('/ajout', 'create')->name('blog.article.create');
 });
 
-Route::controller(PortfolioController::class)->prefix('portfolios')->middleware('web')->group(function() {
+Route::controller(PortfolioController::class)->prefix('portfolios')->middleware('web')->group(function () {
     Route::get('/', 'index')->name('portfolios.home');
     Route::get('/{portfolio:slug}', 'show')->name('portfolios.show');
 });
 
-Route::controller(AdminController::class)->prefix('admin')->middleware(['auth', 'verified'])->group(function() {
+Route::controller(CommentController::class)->prefix('comment')->middleware('auth')->name('comment.')->group(function () {
+    Route::post('/save/on/{post}', 'store')->name('store');
+    Route::post('/delete/on/{post}', 'destroy')->name('delete');
+});
+
+Route::controller(CommentReplyController::class)->prefix('comment_reply')->middleware('auth')->name('comment_reply.')->group(function () {
+    Route::post('/save/on/{comment}', 'store')->name('store');
+    Route::post('/delete/on/{comment}', 'destroy')->name('delete');
+});
+
+Route::controller(AdminController::class)->prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', 'index')->name('dashboard');
 
     // Articles
@@ -59,20 +71,17 @@ Route::controller(AdminController::class)->prefix('admin')->middleware(['auth', 
 });
 
 Route::middleware('auth')->group(function () {
-    Route::controller(DashboardController::class)->prefix('dashboard')->group(function() {
+    Route::controller(DashboardController::class)->prefix('dashboard')->group(function () {
         Route::post('/store-new-category', 'saveCategory')->name('dashboard.store-category');
     });
-    Route::controller(ProfileController::class)->group(function() {
+    Route::controller(ProfileController::class)->group(function () {
         Route::get('/profile', 'edit')->name('profile.edit');
         Route::patch('/profile', 'update')->name('profile.update');
-        Route::delete('/profile', 'destroy')->name('profile.destroy');    
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
     });
 });
 
 // Others Pages
-Route::get('/politique-de-confidentialite', function() {
-    return Inertia::render('Infos/Politiques');
-})->name('pages.politiques');
+Route::inertia('/politique-de-confidentialite', 'Infos/Politiques')->name('pages.politiques');
 
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
