@@ -37,6 +37,13 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <InputError class="mt-2" :message="errors?.tags" />      
                                     </div>
+                                    <div class="w-full col-span-full">
+                                        <label for="githublink"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lien GitHub</label>
+                                        <input type="url" name="githublink" v-model="form.github_link"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        <InputError class="mt-2" :message="errors?.github_link" />      
+                                    </div>
                                     <div class="sm:col-span-2 flex items-center justify-center w-full">
                                         <label for="dropzone-file"
                                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -76,18 +83,21 @@
 </template>
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { ref } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 import { router, useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
 
 const props = defineProps({
-    errors: Object
+    errors: Object,
+    portfolio: Object,
 });
 const form = useForm({
-    title: null,
-    description: null,
-    tags: null,
-    images: []
+    title: props.portfolio.title ?? null,
+    slug: props.portfolio.slug ?? null,
+    description: props.portfolio.description ?? null,
+    tags: props.portfolio.tags?.map(tag => tag.name).join(', ') ?? null,
+    github_link: props.portfolio.github_link ?? null,
+    images: props.portfolio.images ?? [],
 });
 const uploadedImages = ref([]);
 const previousPage = () => window.history.back();
@@ -96,10 +106,6 @@ const createNewRealisation = (event) => {
         preserveState: true,
         onError: (error) => {
             console.log(error);
-        },
-        onSuccess: () => {
-            form.reset();
-            uploadedImages.value = [];
         }
     })
 };
@@ -118,4 +124,13 @@ const addMedias = (event) => {
         }
     }
 }
+
+// Auto add image from current portfolo if exists into uploadImages array
+onMounted(() => {
+    if(form.images) {
+        form.images.forEach((image) => {
+            uploadedImages.value = [...uploadedImages.value].concat(`/storage/uploads/${image.url}`);
+        });
+    }
+});
 </script>

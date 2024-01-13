@@ -74,7 +74,7 @@
                                     {{ portfolio.status }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="#" class="font-medium p-2 rounded bg-yellow-600 text-white dark:text-white mr-2">Modifier</a>
+                                    <Link :href="route('dashboard.portfolios.update', [portfolio.slug])" class="font-medium p-2 rounded bg-yellow-600 text-white dark:text-white mr-2">Modifier</Link>
                                     <a @click="deletePortfolio(portfolio)" href="#" class="font-medium p-2 rounded bg-red-600 text-white dark:text-white mr-2">Supprimer</a>
                                     <Link :href="route('portfolios.show', [portfolio.slug])" class="font-medium p-2 rounded bg-gray-900 text-white dark:text-white">Visualiser</Link>
                                 </td>

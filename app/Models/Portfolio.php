@@ -18,6 +18,7 @@ class Portfolio extends Model
         'title',
         'slug',
         'description',
+        'github_link',
         'user_id',
     ];
 

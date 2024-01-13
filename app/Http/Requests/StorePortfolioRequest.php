@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,12 +23,29 @@ class StorePortfolioRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'title' => ['string', 'max:255', 'required'],
-            'tags'   => ['string', 'nullable', 'max:255'],
+            'slug' => ['string', 'nullable'],
+            'tags' => ['string', 'nullable', 'max:255'],
             'description' => ['string', 'required'],
+            'github_link' => ['nullable', 'url'],
             'images' => ['array', 'required'],
-            'images.*' => ['image','mimes:jpeg,jpg,png,webp,svg', 'max:2048']
         ];
+
+        // Check if 'images' is an array
+        if (is_array($this->input('images'))) {
+            foreach ($this->input('images') as $index => $image) {
+                // Check if the current image is an UploadedFile instance
+                if ($image instanceof UploadedFile) {
+                    // If an UploadedFile instance, apply image validation rules
+                    $rules["images.$index"] = ['image', 'mimes:jpeg,jpg,png,webp,svg', 'max:2048'];
+                } else {
+                    // If not an UploadedFile instance, it might be an existing image
+                    $rules["images.$index.id"] = ['required', 'exists:medias,id'];
+                }
+            }
+        }
+
+        return $rules;
     }
 }

@@ -67,6 +67,10 @@ Route::controller(AdminController::class)->prefix('admin')->middleware(['auth', 
     Route::get('/dashboard/portfolios', 'showPortfolios')->name('dashboard.portfolios');
     Route::get('/dashboard/portfolios/ajout', 'createPortfolio')->name('dashboard.portfolios.create');
     Route::post('/dashboard/portfolios/ajout', 'storePortfolio')->name('dashboard.portfolios.store');
+
+    Route::get('/dashboard/portfolios/modification/{portfolio:slug}', 'updatePortfolio')->name('dashboard.portfolios.update');
+    Route::post('/dashboard/portfolios/modification/{portfolio:slug}', 'storePortfolio')->name('dashboard.portfolios.update');
+
     Route::delete('/dashboard/delete-portfolio/{portfolio_id}', 'deletePortfolio')->name('dashboard.portfolios.delete');
 });
 

@@ -90,6 +90,14 @@ class AdminController extends Controller
     {
         return Inertia::render('Portfolios/Create');
     }
+
+    public function updatePortfolio(Portfolio $portfolio)
+    {
+        return Inertia::render('Portfolios/Create', [
+            'portfolio' => $portfolio,
+        ]);
+    }
+
     public function createArticle()
     {
         return Inertia::render('Posts/Create');
@@ -106,7 +114,9 @@ class AdminController extends Controller
         unset($validated['tags']);
 
         // Add new portfolio
-        $portfolio = Portfolio::firstOrCreate($validated);
+        $portfolio = Portfolio::updateOrCreate([
+            'slug' => $validated['slug']
+        ], $validated);
 
         // Attach tags
         $tags->each(function ($tagName) use ($portfolio) {
@@ -120,7 +130,7 @@ class AdminController extends Controller
                 return redirect()->back()->withErrors('Oups... Une erreur a été produite !');
             }
 
-            $portfolio->tags()->attach($tag->id);
+            $portfolio->tags()->sync($tag->id);
         });
 
         // Store and Attach images
@@ -180,7 +190,7 @@ class AdminController extends Controller
                     return redirect()->back()->withErrors('Oups... Une erreur a été produite !');
                 }
 
-                $article->tags()->attach($tag->id);
+                $article->tags()->sync($tag->id);
             });
         });
 
