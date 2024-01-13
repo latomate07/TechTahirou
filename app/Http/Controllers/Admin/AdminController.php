@@ -26,18 +26,18 @@ class AdminController extends Controller
     public function index()
     {
         $statistics = Statistic::with('statisticable')
-                                ->has('statisticable')
-                                ->get()
-                                ->groupBy('statisticable_type')
-                                ->map(function ($group, $type) {
-                                    return collect([
-                                        (new $type)->alias() => [
-                                            'max_views' => $group->sum('visits'),
-                                            'max_liked' => $group->sum('likes')
-                                        ]
-                                    ]);
-                                })
-                                ->collapse();
+            ->has('statisticable')
+            ->get()
+            ->groupBy('statisticable_type')
+            ->map(function ($group, $type) {
+                return collect([
+                    (new $type)->alias() => [
+                        'max_views' => $group->sum('visits'),
+                        'max_liked' => $group->sum('likes')
+                    ]
+                ]);
+            })
+            ->collapse();
 
         return Inertia::render('Dashboard', [
             'posts'      => Post::with('category', 'statistic')->get(),
@@ -48,10 +48,10 @@ class AdminController extends Controller
     public function showArticles(Request $request)
     {
         $posts = Post::with('user', 'category', 'comments', 'thumbnails')
-                      ->when($request->has('search'), function($query) use($request) {
-                           $query->where('title', 'LIKE', '%'. $request->search .'%');
-                      })
-                      ->paginate(5);
+            ->when($request->has('search'), function ($query) use ($request) {
+                $query->where('title', 'LIKE', '%' . $request->search . '%');
+            })
+            ->paginate(5);
 
         return Inertia::render('Admin/Articles', [
             'posts' => $posts
@@ -61,10 +61,10 @@ class AdminController extends Controller
     public function showPortfolios(Request $request)
     {
         $portfolios = Portfolio::with('images', 'user')
-                                ->when($request->has('search'), function($query) use($request) {
-                                    $query->where('title', 'LIKE', '%'. $request->search .'%');
-                                })
-                                ->paginate(5);
+            ->when($request->has('search'), function ($query) use ($request) {
+                $query->where('title', 'LIKE', '%' . $request->search . '%');
+            })
+            ->paginate(5);
 
         return Inertia::render('Admin/Portfolios', [
             'portfolios' => $portfolios
@@ -109,10 +109,10 @@ class AdminController extends Controller
         $portfolio = Portfolio::firstOrCreate($validated);
 
         // Attach tags
-        $tags->each(function($tagName) use($portfolio) {
+        $tags->each(function ($tagName) use ($portfolio) {
             try {
                 $tag = Tag::firstOrCreate(['name' => trim($tagName)]);
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 $customMessage = "Error occured when trying to attach new tag. ";
                 Log::error($customMessage . $e->getMessage());
                 $portfolio->delete();
@@ -129,7 +129,7 @@ class AdminController extends Controller
             foreach ($images as $image) {
                 $imageName = Str::uuid() . '.' . $image->extension();
                 $image->move(public_path('storage/uploads'), $imageName);
-                
+
                 $portfolio->images()->save(new Media([
                     'url'  => $imageName,
                     'type' => MediaType::Thumbnail
@@ -146,9 +146,9 @@ class AdminController extends Controller
 
         // Add new article
         $article = Auth::user()->posts()
-                               ->updateOrCreate(collect($validated)
-                                                        ->except(['images', 'tags', 'categories', 'sub_categories'])
-                                                        ->toArray());
+            ->updateOrCreate(collect($validated)
+                ->except(['images', 'tags', 'categories', 'sub_categories'])
+                ->toArray());
         // Store category
         $category = $article->category()->updateOrCreate([
             'name'    => trim($validated['categories'])
@@ -157,36 +157,36 @@ class AdminController extends Controller
         // Store subcategories
         $requestSubCategories = Str::of($validated['sub_categories'])->explode(',');
 
-        $requestSubCategories->when($request->has('sub_categories'), function(Collection $requestSubCategories) use($category) {
-            $requestSubCategories->each(function($subCategory) use($category) {
+        $requestSubCategories->when($request->has('sub_categories'), function (Collection $requestSubCategories) use ($category) {
+            $requestSubCategories->each(function ($subCategory) use ($category) {
                 $category->subCategories()->updateOrCreate([
                     'name'    => trim($subCategory)
-                ]); 
+                ]);
             });
         });
 
         // Attach tags
         $tags = Str::of($validated['tags'])->explode(',');
 
-        $tags->when($request->has('tags'), function(Collection $tags) use($article) {
-            $tags->each(function($tagName) use($article) {
+        $tags->when($request->has('tags'), function (Collection $tags) use ($article) {
+            $tags->each(function ($tagName) use ($article) {
                 try {
                     $tag = Tag::firstOrCreate(['name' => trim($tagName)]);
-                } catch(\Exception $e) {
+                } catch (\Exception $e) {
                     $customMessage = "Error occured when trying to attach new tag. ";
                     Log::error($customMessage . $e->getMessage());
                     $article->delete();
-    
+
                     return redirect()->back()->withErrors('Oups... Une erreur a été produite !');
                 }
-    
+
                 $article->tags()->attach($tag->id);
             });
         });
 
         // Store and Attach images
         $images = $validated['images'];
-        collect($images)->when($request->hasFile('images'), function(Collection $images) use($article) {
+        collect($images)->when($request->hasFile('images'), function (Collection $images) use ($article) {
             foreach ($images as $image) {
                 $imageName = Str::uuid() . '.' . $image->extension();
                 $image->move(public_path('storage/uploads'), $imageName);

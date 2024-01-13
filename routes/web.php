@@ -40,15 +40,15 @@ Route::controller(PortfolioController::class)->prefix('portfolios')->middleware(
     Route::get('/{portfolio:slug}', 'show')->name('portfolios.show');
 });
 
-Route::controller(CommentController::class)->prefix('comment')->middleware('auth')->name('comment.')->group(function () {
-    Route::post('/save/on/{post}', 'store')->name('store');
-    Route::post('/delete/on/{post}', 'destroy')->name('delete');
-});
+// Route::controller(CommentController::class)->prefix('comment')->middleware('auth')->name('comment.')->group(function () {
+//     Route::post('/save/on/{post}', 'store')->name('store');
+//     Route::post('/delete/on/{post}', 'destroy')->name('delete');
+// });
 
-Route::controller(CommentReplyController::class)->prefix('comment_reply')->middleware('auth')->name('comment_reply.')->group(function () {
-    Route::post('/save/on/{comment}', 'store')->name('store');
-    Route::post('/delete/on/{comment}', 'destroy')->name('delete');
-});
+// Route::controller(CommentReplyController::class)->prefix('comment_reply')->middleware('auth')->name('comment_reply.')->group(function () {
+//     Route::post('/save/on/{comment}', 'store')->name('store');
+//     Route::post('/delete/on/{comment}', 'destroy')->name('delete');
+// });
 
 Route::controller(AdminController::class)->prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', 'index')->name('dashboard');

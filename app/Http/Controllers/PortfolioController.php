@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use Inertia\Inertia;
 use App\Models\Portfolio;
-use App\Models\Statistic;
 use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
@@ -21,9 +20,7 @@ class PortfolioController extends Controller
                         ->paginate(6);
 
         // Get existed tags
-        $tagsAttribued = Portfolio::whereHas('tags')->get()->map(function($portfolio) {
-            return $portfolio->tags;
-        })->collapse();
+        $tagsAttribued = Tag::whereHas('portfolios')->get();
 
         return Inertia::render('Portfolios/Home', [
             'realisations' => $realisations,

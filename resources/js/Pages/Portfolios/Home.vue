@@ -14,7 +14,7 @@
                         Tous
                     </button>
                     <div class="flex overflow-x-scroll whitespace-nowrap md:p-5 p-1">
-                        <button v-for="tag in tags" :key="tag.id" type="button" 
+                        <button v-for="tag in tagsAttribued" :key="tag.id" type="button" 
                                 @click="tagFilter(tag.name, $event)"
                                 class="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none rounded-full text-base sm:px-5 sm:py-2.5 px-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800 tagButtons">
                             {{ tag.name }}
@@ -52,7 +52,8 @@ import { router } from '@inertiajs/core';
 import { Head } from '@inertiajs/vue3';
 const props = defineProps({
     realisations: Object,
-    tags: Object
+    tags: Object,
+    tagsAttribued: Object,
 });
 const tagFilter = (tag, event) => {    
     router.get(route('portfolios.home'), {searchByTag: tag}, {

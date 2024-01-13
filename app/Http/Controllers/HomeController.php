@@ -16,10 +16,11 @@ class HomeController extends Controller
     /**
      * Return Home View
      */
-    public function index() {
+    public function index()
+    {
         $portfolios = Portfolio::with('images', 'user')
-                                ->get()
-                                ->take(3);
+            ->get()
+            ->take(3);
 
         $posts = Post::with('user', 'category', 'comments', 'thumbnails', 'statistic')->get();
 
@@ -50,7 +51,7 @@ class HomeController extends Controller
                 $validated['email'],
                 $validated['message']
             ));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             Log::error("Une erreur a été produite lors de l'envoi d'un mail" . $e->getMessage());
         }
 

@@ -21,25 +21,13 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show(String $uniquePostSlug)
+    public function show(Post $post)
     {   
-        $post = Post::with(['user', 'category', 'comments', 'thumbnails', 'statistic'])
-                    ->where('slug', $uniquePostSlug)
-                    ->first();
+        // Increment view
+        $post->statistic()->firstOrCreate()->increment('visits');
 
-        if(is_null($post->statistic()->first())) {
-            $post->statistic()->create([
-                'visits' => 1
-            ]);
-        }
-        $post->statistic()->increment('visits');
-
-        // Don't continue if post wasn't found
-        abort_if(is_null($post), 404);
-
-        // Get related posts
+        // Get related posts [Temporary]
         $relatedPosts = Post::with('user', 'category', 'comments', 'thumbnails', 'statistic')->whereNotIn('id', [$post->id])->get();
-
         
         return Inertia::render('Blog/Show', [
             'post' => $post,
