@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <RelatedPortfolios :portfolios="relatedRealisations" class="mt-16"/>
+        <RelatedPortfolios v-if="relatedRealisations.length > 0" :portfolios="relatedRealisations" class="mt-16"/>
     </MainLayout>
 </template>
 <script setup>
