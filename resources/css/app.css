@@ -5,7 +5,7 @@
 @layer base {
     @font-face {
         font-family: "Raleway";
-        src: url("fonts/Raleway/Raleway-VariableFont_wght.ttf");
+        src: url("/fonts/Raleway/Raleway-VariableFont_wght.ttf");
         font-weight: 100 200 300 400 500 600 700 800 900;
         font-style: normal;
         font-display: swap;
@@ -13,7 +13,7 @@
 
     @font-face {
         font-family: "Rubik Glitch";
-        src: url("fonts/Rubik_Glitch/RubikGlitch-Regular.ttf");
+        src: url("/fonts/Rubik_Glitch/RubikGlitch-Regular.ttf");
         font-weight: 100 200 300 400 500 600 700 800 900;
         font-style: normal;
         font-display: swap;
