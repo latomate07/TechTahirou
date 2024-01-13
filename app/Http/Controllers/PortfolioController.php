@@ -33,9 +33,9 @@ class PortfolioController extends Controller
     }
 
     public function show(Portfolio $portfolio)
-    {   
+    {
         // Increment view
-        $portfolio->statistic()->increment('visits');
+        $portfolio->statistic()->firstOrCreate()->increment('visits');
 
         // Get related realisations [Temporary]
         $relatedRealisations = Portfolio::with('images', 'statistic')->whereNotIn('id', [$portfolio->id])->get();
