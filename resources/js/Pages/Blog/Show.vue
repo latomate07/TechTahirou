@@ -8,7 +8,7 @@
                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                             <DefaultUserLogo class="mr-4"/>
                             <div>
-                                <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">{{ post.user.name }}</a>
+                                <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">{{ post.user?.name }}</a>
                                 <p class="text-base font-light text-gray-500 dark:text-gray-400">Publié <time pubdate>{{ post.created_date }}</time></p>
                             </div>
                         </div>
@@ -72,6 +72,8 @@ const props = defineProps({
     post: Object,
     relatedPosts: Object
 });
+
+console.log(props.post.user);
 
 onMounted(() => {
     initFlowbite();

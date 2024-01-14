@@ -40,6 +40,15 @@ class Post extends Model
     ];
 
     /**
+     * The attribute that must always loaded.
+     */
+    protected $with = [
+        'user',
+        'thumbnails',
+        'comments'
+    ];
+
+    /**
      * Get post author
      * 
      * @return \Illuminate\Database\Eloquent\Relations\Relation
