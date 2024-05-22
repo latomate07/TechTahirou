@@ -91,14 +91,16 @@ const props = defineProps({
     errors: Object,
     portfolio: Object,
 });
+
 const form = useForm({
-    title: props.portfolio.title ?? null,
-    slug: props.portfolio.slug ?? null,
-    description: props.portfolio.description ?? null,
-    tags: props.portfolio.tags?.map(tag => tag.name).join(', ') ?? null,
-    github_link: props.portfolio.github_link ?? null,
-    images: props.portfolio.images ?? [],
+    title: props.portfolio?.title ?? null,
+    slug: props.portfolio?.slug ?? null,
+    description: props.portfolio?.description ?? null,
+    tags: props.portfolio?.tags?.map(tag => tag.name).join(', ') ?? null,
+    github_link: props.portfolio?.github_link ?? null,
+    images: props.portfolio?.images ?? [],
 });
+
 const uploadedImages = ref([]);
 const previousPage = () => window.history.back();
 const createNewRealisation = (event) => {
